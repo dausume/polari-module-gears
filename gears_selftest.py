@@ -1,5 +1,5 @@
 """
-@module gears.selftest_gears
+@module gears.gears_selftest
 
 gr-1 selftests. Everything asserted here is HAND-COMPUTED first:
 
@@ -19,12 +19,12 @@ gr-1 selftests. Everything asserted here is HAND-COMPUTED first:
     acceptance arithmetic for gr-5: the clock is the instrument.
 
 Run from polari-framework/:  PYTHONPATH=.:modules python3 -m
-gears.selftest_gears
+gears.gears_selftest
 """
 
 import types
 
-from gears.gear_kinematics import (
+from gears.custom.gear_kinematics import (
     solve_train, train_catalog, type_catalog,
 )
 from gears.gear_seed import (
@@ -238,7 +238,7 @@ check('internal centre distance is a DIFFERENCE of pitch radii '
 
 print('== suite: significant-figure rounding (the bug that bit '
       'three times) ==')
-from gears.gear_kinematics import _sig  # noqa: E402
+from gears.custom.gear_kinematics import _sig  # noqa: E402
 
 check('_sig keeps 12 significant figures at ANY scale — a clock '
       'speed and a micro-newton-metre survive the same call',
@@ -258,7 +258,7 @@ from motors.motor_basis import SEED_MOTOR_DESIGNS  # noqa: E402
 from magnetics.magnet_seed import (  # noqa: E402
     SEED_MAGNETIC_POWDERS, SEED_MATERIAL_OPTIONS, SEED_USE_ROLES,
 )
-from gears.gear_motor import motor_driven_train  # noqa: E402
+from gears.custom.gear_motor import motor_driven_train  # noqa: E402
 
 mgr7 = _mgr()
 for cls, seed in (('MotorDesignDefinition', SEED_MOTOR_DESIGNS),
@@ -352,7 +352,7 @@ check('with motors absent from the object tree, the splice refuses '
       not out.get('ok') and 'motors module' in out['refusal'])
 
 print('== suite: gr-6 planetary + the clock-face question ==')
-from gears.planetary import (  # noqa: E402
+from gears.custom.planetary import (  # noqa: E402
     PLANETARY_CONFIGURATIONS, clock_face_sizing,
     motion_works_ratio, planetary_ratio,
 )
@@ -412,7 +412,7 @@ check('stiction is named as the real-world limit a stepper faces '
 print('\n-- gr-4: the isolated gear-train scene --')
 import json as _gsj                                  # noqa: E402
 
-from gears.gear_scene import (                       # noqa: E402
+from gears.gear_scene_seed import (                       # noqa: E402
     SEED_GEAR_SIM_SPACES, SEED_TRAIN_GEAR_SHAPES, SHAFT_X,
     SHAPE_OF_GEAR, TRAIN_BODIES, gear_scene_replay,
 )

@@ -1,5 +1,5 @@
 """
-@module gears.gear_kinematics
+@module gears.custom.gear_kinematics
 
 gr-1: THE ABSTRACT SOLVE (GEARS_PLAN §4a). Walk the train graph from
 the input shaft outward; every mesh edge imposes a speed ratio and a
@@ -26,8 +26,8 @@ Honesty (stated on every payload, not just here):
   - Efficiency priors are literature bands; the midpoint is used
     when nothing measured exists and the payload says so.
 
-@consumers gears.gear_api, gears.gear_motor (gr-5),
-           gears.selftest_gears
+@consumers gears.gear_api, gears.custom.gear_motor (gr-5),
+           gears.gears_selftest
 """
 
 import math

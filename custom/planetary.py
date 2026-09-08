@@ -1,5 +1,5 @@
 """
-@module gears.planetary
+@module gears.custom.planetary
 
 gr-6: PLANETARY RATIO ALGEBRA (the table the gr-1 solver refused to
 guess) + the CONCENTRIC HAND DRIVE, and the sizing question that
@@ -45,12 +45,12 @@ bearing friction, which is why real clock hands are counterweighted
 on large dials. The sizing function takes it as a knob rather than
 assuming either way.
 
-@consumers gears.gear_api, gears.selftest_gears
+@consumers gears.gear_api, gears.gears_selftest
 """
 
 import math
 
-from gears.gear_kinematics import _named, _rows
+from gears.custom.gear_kinematics import _named, _rows
 
 G = 9.80665
 
@@ -192,7 +192,7 @@ def clock_face_sizing(manager, train_name='clock-train-m0',
             return {'ok': False,
                     'refusal': f'no GearTrainDefinition named '
                                f'"{train_name}" and no torque given'}
-        from gears.gear_kinematics import solve_train
+        from gears.custom.gear_kinematics import solve_train
         sol = solve_train(manager, train_name)
         if not sol.get('ok'):
             return sol

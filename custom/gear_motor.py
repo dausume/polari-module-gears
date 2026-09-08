@@ -1,5 +1,5 @@
 """
-@module gears.gear_motor
+@module gears.custom.gear_motor
 
 gr-5: THE MOTOR SPLICE (GEARS_PLAN §5) — motor logic meeting gear
 logic, which is the whole point of the gears arc.
@@ -23,10 +23,10 @@ Torque, by contrast, transforms EXACTLY: ratio x efficiency, and the
 underlying motor watermarks (realization level, parity multipliers,
 mu~2 smallness) travel through unchanged.
 
-@consumers gears.gear_api, gears.selftest_gears
+@consumers gears.gear_api, gears.gears_selftest
 """
 
-from gears.gear_kinematics import _named, solve_train
+from gears.custom.gear_kinematics import _named, solve_train
 
 #: A Lavet stepper advances 180 degrees per pulse => half a
 #: revolution per pulse => 0.5 * rate_hz rev/s => x60 rpm.
@@ -53,7 +53,7 @@ def _motor_drive(manager, design, speed_rpm_override):
     refusal dict. torque_points is [(label, torque_nm), ...] — the
     envelope the train is solved at, not a single flattering
     number."""
-    from motors.motor_designer import torque_curve
+    from motors.custom.motor_designer import torque_curve
 
     topology = getattr(design, 'topology', '')
     drive = _loads(design, 'drive_json', {})

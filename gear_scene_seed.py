@@ -1,5 +1,5 @@
 """
-@module gears.gear_scene
+@module gears.gear_scene_seed
 
 gr-4 (Dustin 2026-08-01): "make the gear assembly isolatable and
 renderable separate from the motor — the driving gear is the only
@@ -25,14 +25,14 @@ the GearDefinition rows (geometry needs them at seed time); the
 selftest pins shape == gear row for every pair, so the drawn train
 and the solved train cannot drift apart silently.
 
-@consumers motors.clock_scene (the gear-replay layer),
+@consumers motors.clock_scene_basis (the gear-replay layer),
 polariServer seed pass (GearSceneSeed, upsert),
-gears.selftest_gears
+gears.gears_selftest
 """
 
 import json
 
-from composition.seed_upsert import upsert_seed_pairs
+from composition.custom.seed_upsert import upsert_seed_pairs
 
 PROV = 'gr-4'
 TRAIN = 'clock-train-m0'
@@ -200,7 +200,7 @@ def gear_scene_replay(manager, train_name=TRAIN, time_scale=60.0):
     """Per-body rotation rates from the SOLVED train — the display
     is a kinematic replay of the ratios, sped up by a named
     time_scale so sub-rpm wheels visibly turn."""
-    from gears.gear_kinematics import solve_train
+    from gears.custom.gear_kinematics import solve_train
     solved = solve_train(manager, train_name)
     if not solved.get('ok'):
         return {'ok': False,
